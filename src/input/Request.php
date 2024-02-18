@@ -47,7 +47,6 @@ class Request implements IRequest
      */
     function fetch(string $paramName, $filter = null)
     {
-
         if (!array_key_exists($paramName, $this->data))
             throw new Exception("Requested parameter has not been set.");
 
