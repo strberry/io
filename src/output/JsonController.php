@@ -7,8 +7,7 @@ class JsonController implements IController
     {
         header('Content-Type: application/json; charset=utf-8');
         http_response_code($statusCode);
-        echo json_encode($data);
-        return strval($data);
+        return json_encode($data);
     }
 
 }
