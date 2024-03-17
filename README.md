@@ -17,6 +17,10 @@ $number = $request->fetchOrNull('num'); // Null on failure
 
 // Filtering for Integers
 $number = $request->fetch('num', 'integer');
+
+// Fetching uploaded files
+$file = $request->fetchFile('filename');
+rename($file->getTempName(), "uploads/myfile.txt"); // Uploading it
 ```
 #### Output
 ```php

@@ -2,9 +2,8 @@
 
 class Request implements IRequest
 {
-
     private array $data;
-    private $requestType;
+    private string $requestType;
 
     /**
      * @throws Exception
@@ -15,7 +14,7 @@ class Request implements IRequest
         $this->data = $this->fetchData();
     }
 
-    function fetchRequestType()
+    private function fetchRequestType(): string
     {
         return $_SERVER['REQUEST_METHOD'];
     }
@@ -23,7 +22,7 @@ class Request implements IRequest
     /**
      * @throws Exception
      */
-    function fetchData(): array
+    public function fetchData(): array
     {
         return match ($this->requestType) {
             "GET" => $_GET,
@@ -31,7 +30,6 @@ class Request implements IRequest
             default => throw new Exception("Unsupported request type!"),
         };
     }
-
 
     function fetchOrNull(string $paramName, $filter = null)
     {
@@ -56,6 +54,26 @@ class Request implements IRequest
             return $value;
 
         return (new ArgumentFilter())->{$filter}($value);
+    }
+
+    /**
+     * @throws Exception
+     */
+    function fetchFile(string $paramName): File
+    {
+        if (!array_key_exists($paramName, $_FILES))
+            throw new Exception("Requested file has not been set.");
+
+        return new File($_FILES[$paramName]['tmp_name']);
+    }
+
+    function fetchFileOrNull(string $paramName): ?File
+    {
+        try {
+            return $this->fetchFile($paramName);
+        } catch (Exception $e) {
+            return null;
+        }
     }
 
 }

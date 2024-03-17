@@ -2,11 +2,11 @@
 
 interface IRequest
 {
-    function fetchRequestType();
-
-    function fetchData();
-
     function fetch(string $paramName, $filter = null);
 
     function fetchOrNull(string $paramName, $filter = null);
+
+    function fetchFile(string $paramName): File;
+
+    function fetchFileOrNull(string $paramName): ?File;
 }
