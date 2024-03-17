@@ -24,7 +24,7 @@ class Request implements IRequest
     /**
      * @throws Exception
      */
-    function fetchData(): array
+    public function fetchData(): array
     {
         return match ($this->requestType) {
             "GET" => $_GET,
@@ -61,6 +61,17 @@ class Request implements IRequest
             return $value;
 
         return (new ArgumentFilter())->{$filter}($value);
+    }
+
+    /**
+     * @throws Exception
+     */
+    function fetchFile(string $paramName)
+    {
+        if (!array_key_exists($paramName, $this->files))
+            throw new Exception("Requested file has not been set.");
+
+        return $this->files[$paramName];
     }
 
 }
