@@ -2,7 +2,7 @@
 
 class Request implements IRequest
 {
-
+    private array $files;
     private array $data;
     private string $requestType;
 
@@ -13,6 +13,7 @@ class Request implements IRequest
     {
         $this->requestType = $this->fetchRequestType();
         $this->data = $this->fetchData();
+        $this->files = $this->fetchFiles();
     }
 
     function fetchRequestType(): string
@@ -32,6 +33,10 @@ class Request implements IRequest
         };
     }
 
+    function fetchFiles(): array
+    {
+        return $_FILES;
+    }
 
     function fetchOrNull(string $paramName, $filter = null)
     {
