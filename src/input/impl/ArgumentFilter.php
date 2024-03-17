@@ -1,6 +1,6 @@
 <?php
 
-class ArgumentFilter implements IFilter
+class ArgumentFilter
 {
 
     /**
