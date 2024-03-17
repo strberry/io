@@ -4,7 +4,7 @@ class Request implements IRequest
 {
 
     private array $data;
-    private $requestType;
+    private string $requestType;
 
     /**
      * @throws Exception
@@ -15,7 +15,7 @@ class Request implements IRequest
         $this->data = $this->fetchData();
     }
 
-    function fetchRequestType()
+    function fetchRequestType(): string
     {
         return $_SERVER['REQUEST_METHOD'];
     }
