@@ -64,7 +64,8 @@ class Request implements IRequest
         if (!array_key_exists($paramName, $_FILES))
             throw new Exception("Requested file has not been set.");
 
-        return new File($_FILES[$paramName]['tmp_name']);
+        $fileData = $_FILES[$paramName];
+        return new File($fileData["name"], $fileData["type"], $fileData["tmp_name"], $paramName);
     }
 
     function fetchFileOrNull(string $paramName): ?File
@@ -74,6 +75,11 @@ class Request implements IRequest
         } catch (Exception $e) {
             return null;
         }
+    }
+
+    function moveFile(File $file, string $newLocation): void
+    {
+        copy($file->getTempPath(), $newLocation);
     }
 
 }
