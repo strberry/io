@@ -20,7 +20,7 @@ $number = $request->fetch('num', 'integer');
 
 // Fetching uploaded files
 $file = $request->fetchFile('filename');
-rename($file->getTempName(), "uploads/myfile.txt"); // Uploading it
+$request->moveFile($file, 'uploads/myfile.txt'); // Uploading it
 ```
 #### Output
 ```php
