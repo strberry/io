@@ -9,4 +9,6 @@ interface IRequest
     function fetchFile(string $paramName): File;
 
     function fetchFileOrNull(string $paramName): ?File;
+
+    function moveFile(File $file, string $newLocation): void;
 }
